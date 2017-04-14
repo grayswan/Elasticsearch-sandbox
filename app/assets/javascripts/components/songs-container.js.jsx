@@ -17,8 +17,8 @@ class SongsContainer extends React.Component {
       <div>
         <SongsSearch
           searchPath={this.props.searchPath}
-          submitPath={this.searchSongs}
-          cancelPath={this.fetchSongs}
+          submitPath={this.searchSongs.bind(this)}
+          cancelPath={this.fetchSongs.bind(this)}
         />
         <Songs songs={this.state.songs} />
       </div>
