@@ -1,8 +1,8 @@
 class Songs extends React.Component {
   render() {
+    const showSongs = (song) => <Song name={song.name} artist={song.artist} key={song.id}/>;
     return (
-      const showSongs = (song) => <Song name={song.name} artist={song.artist} key={song.id}/>;
-		  <ul>{this.props.songs.map(showSongs)}</ul>;
+      <ul>{this.props.songs.map(showSongs)}</ul>
     )
   }
 }

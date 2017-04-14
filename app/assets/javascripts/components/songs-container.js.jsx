@@ -12,6 +12,19 @@ class SongsContainer extends React.Component {
     this.fetchSongs();
   }
 
+  render() {
+    return (
+      <div>
+        <SongsSearch
+          searchPath={this.props.searchPath}
+          submitPath={this.searchSongs}
+          cancelPath={this.fetchSongs}
+        />
+        <Songs songs={this.state.songs} />
+      </div>
+    )
+  }
+
   fetchSongs() {
     $.getJSON(this.props.songsPath, (data) => {
       this.setState({
@@ -22,7 +35,7 @@ class SongsContainer extends React.Component {
 
   searchSongs(event) {
     if (event.target.value) {
-      $.getJSON(this.props.searchPath + ?query=" + event.target.value", (data) => {
+      $.getJSON(this.props.searchPath + "?query=" + event.target.value, (data) => {
         this.setState({
           songs: data
         })
@@ -30,18 +43,5 @@ class SongsContainer extends React.Component {
     } else {
       this.fetchSongs();
     }
-  }
-
-  render() {
-    return (
-      <div>
-        <Songs songs={this.state.songs} />
-        <SongsSearch
-          searchPath={this.props.searchPath}
-          submitPath={this.searchSongs}
-          cancelPath={this.fetchSongs}
-        />
-      </div>
-    )
   }
 }

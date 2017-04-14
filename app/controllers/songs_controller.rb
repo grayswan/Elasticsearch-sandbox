@@ -7,6 +7,15 @@ class SongsController < ApplicationController
     @songs = Song.all
   end
 
+  def search
+    @songs = Song.search(params[:query])
+    if request.xhr?
+      render :json => @songs.to_json
+    else
+      render :index
+    end
+  end
+
   # GET /songs/1
   # GET /songs/1.json
   def show
@@ -70,14 +79,5 @@ class SongsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def song_params
       params.require(:song).permit(:name, :artist)
-    end
-
-    def search
-    	@songs = Song.search(params[:query])
-    	if request.xhr?
-    		render :json => @songs.to_json
-    	else
-    		render :index
-    	end
     end
 end
